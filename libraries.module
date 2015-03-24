@@ -2,7 +2,7 @@
 
 /**
  * @file
- * External library handling for Drupal modules.
+ * External library handling for Backdrop modules.
  */
 
 /**
@@ -14,7 +14,7 @@ function libraries_flush_caches() {
   // in libraries that had been loaded before the cache flushing to be loaded
   // again afterwards.
   foreach (array('libraries_get_path', 'libraries_info') as $name) {
-    drupal_static_reset($name);
+    backdrop_static_reset($name);
   }
 
   // @todo When upgrading from 1.x, update.php attempts to flush caches before
@@ -39,7 +39,7 @@ function libraries_flush_caches() {
  * @ingroup libraries
  */
 function libraries_get_path($name, $base_path = FALSE) {
-  $libraries = &drupal_static(__FUNCTION__);
+  $libraries = &backdrop_static(__FUNCTION__);
 
   if (!isset($libraries)) {
     $libraries = libraries_get_libraries();
@@ -74,12 +74,12 @@ function libraries_get_path($name, $base_path = FALSE) {
  */
 function libraries_get_libraries() {
   $searchdir = array();
-  $profile = drupal_get_path('profile', drupal_get_profile());
+  $profile = backdrop_get_path('profile', backdrop_get_profile());
   $config = conf_path();
 
   // Similar to 'modules' and 'themes' directories in the root directory,
   // certain distributions may want to place libraries into a 'libraries'
-  // directory in Drupal's root directory.
+  // directory in Backdrop's root directory.
   $searchdir[] = 'libraries';
 
   // Similar to 'modules' and 'themes' directories inside an installation
@@ -127,7 +127,7 @@ function libraries_get_libraries() {
  *   the files.
  */
 function libraries_scan_info_files() {
-  $profile = drupal_get_path('profile', drupal_get_profile());
+  $profile = backdrop_get_path('profile', backdrop_get_profile());
   $config = conf_path();
 
   // Build a list of directories.
@@ -296,7 +296,7 @@ function libraries_prepare_files(&$library, $version = NULL, $variant = NULL) {
 function libraries_detect_dependencies(&$library, $version = NULL, $variant = NULL) {
   if (isset($library['dependencies'])) {
     foreach ($library['dependencies'] as &$dependency_string) {
-      $dependency_info = drupal_parse_dependency($dependency_string);
+      $dependency_info = backdrop_parse_dependency($dependency_string);
       $dependency = libraries_detect($dependency_info['name']);
       if (!$dependency['installed']) {
         $library['installed'] = FALSE;
@@ -306,7 +306,7 @@ function libraries_detect_dependencies(&$library, $version = NULL, $variant = NU
           '%library' => $library['name'],
         ));
       }
-      elseif (drupal_check_incompatibility($dependency_info, $dependency['version'])) {
+      elseif (backdrop_check_incompatibility($dependency_info, $dependency['version'])) {
         $library['installed'] = FALSE;
         $library['error'] = 'incompatible dependency';
         $library['error message'] = t('The version %dependency_version of the %dependency library is not compatible with the %library library.', array(
@@ -344,7 +344,7 @@ function libraries_detect_dependencies(&$library, $version = NULL, $variant = NU
  */
 function &libraries_info($name = NULL) {
   // This static cache is re-used by libraries_detect() to save memory.
-  $libraries = &drupal_static(__FUNCTION__);
+  $libraries = &backdrop_static(__FUNCTION__);
 
   if (!isset($libraries)) {
     $libraries = array();
@@ -361,12 +361,12 @@ function &libraries_info($name = NULL) {
     // Gather information from hook_libraries_info() in enabled themes.
     $themes = array();
     foreach (list_themes() as $theme_name => $theme_info) {
-      if ($theme_info->status && file_exists(drupal_get_path('theme', $theme_name) . '/template.php')) {
+      if ($theme_info->status && file_exists(backdrop_get_path('theme', $theme_name) . '/template.php')) {
         // Collect a list of viable themes for re-use when calling the alter
         // hook.
         $themes[] = $theme_name;
 
-        include_once drupal_get_path('theme', $theme_name) . '/template.php';
+        include_once backdrop_get_path('theme', $theme_name) . '/template.php';
 
         $function = $theme_name . '_libraries_info';
         if (function_exists($function)) {
@@ -382,7 +382,7 @@ function &libraries_info($name = NULL) {
     // Gather information from .info files.
     // .info files override module definitions.
     foreach (libraries_scan_info_files() as $machine_name => $file) {
-      $properties = drupal_parse_info_file($file->uri);
+      $properties = backdrop_parse_info_file($file->uri);
       $properties['info type'] = 'info file';
       $properties['info file'] = $file->uri;
       $libraries[$machine_name] = $properties;
@@ -394,7 +394,7 @@ function &libraries_info($name = NULL) {
     }
 
     // Allow enabled modules and themes to alter the registered libraries.
-    // drupal_alter() only takes the currently active theme into account, not
+    // backdrop_alter() only takes the currently active theme into account, not
     // all enabled themes.
     foreach (module_implements('libraries_info_alter') as $module) {
       $function = $module . '_libraries_info_alter';
@@ -624,7 +624,7 @@ function libraries_detect($name) {
  *   See hook_libraries_info() for more information.
  */
 function libraries_load($name, $variant = NULL) {
-  $loaded = &drupal_static(__FUNCTION__, array());
+  $loaded = &backdrop_static(__FUNCTION__, array());
 
   if (!isset($loaded[$name])) {
     $library = cache_get($name, 'cache_libraries');
@@ -710,7 +710,7 @@ function libraries_load_files($library) {
         libraries_load_files(array(
           'files' => $files,
           'path' => '',
-          'library path' => drupal_get_path('module', $provider),
+          'library path' => backdrop_get_path('module', $provider),
           'post-load integration files' => FALSE,
         ));
       }
@@ -718,7 +718,7 @@ function libraries_load_files($library) {
         libraries_load_files(array(
           'files' => $files,
           'path' => '',
-          'library path' => drupal_get_path('theme', $provider),
+          'library path' => backdrop_get_path('theme', $provider),
           'post-load integration files' => FALSE,
         ));
       }
@@ -733,9 +733,9 @@ function libraries_load_files($library) {
   $count = 0;
 
   // Load both the JavaScript and the CSS files.
-  // The parameters for drupal_add_js() and drupal_add_css() require special
+  // The parameters for backdrop_add_js() and backdrop_add_css() require special
   // handling.
-  // @see drupal_process_attached()
+  // @see backdrop_process_attached()
   foreach (array('js', 'css') as $type) {
     if (!empty($library['files'][$type])) {
       foreach ($library['files'][$type] as $data => $options) {
@@ -758,7 +758,7 @@ function libraries_load_files($library) {
         if (!isset($options['group'])) {
           $options['group'] = ($type == 'js') ? JS_DEFAULT : CSS_DEFAULT;
         }
-        call_user_func('drupal_add_' . $type, $data, $options);
+        call_user_func('backdrop_add_' . $type, $data, $options);
         $count++;
       }
     }
@@ -767,7 +767,7 @@ function libraries_load_files($library) {
   // Load PHP files.
   if (!empty($library['files']['php'])) {
     foreach ($library['files']['php'] as $file => $array) {
-      $file_path = DRUPAL_ROOT . '/' . $path . '/' . $file;
+      $file_path = BACKDROP_ROOT . '/' . $path . '/' . $file;
       if (file_exists($file_path)) {
         _libraries_require_once($file_path);
         $count++;
@@ -788,7 +788,7 @@ function libraries_load_files($library) {
         libraries_load_files(array(
           'files' => $files,
           'path' => '',
-          'library path' => drupal_get_path('module', $provider),
+          'library path' => backdrop_get_path('module', $provider),
           'post-load integration files' => FALSE,
         ));
       }
@@ -796,7 +796,7 @@ function libraries_load_files($library) {
         libraries_load_files(array(
           'files' => $files,
           'path' => '',
-          'library path' => drupal_get_path('theme', $provider),
+          'library path' => backdrop_get_path('theme', $provider),
           'post-load integration files' => FALSE,
         ));
       }
@@ -857,7 +857,7 @@ function libraries_get_version($library, $options) {
     'cols' => 200,
   );
 
-  $file = DRUPAL_ROOT . '/' . $library['library path'] . '/' . $options['file'];
+  $file = BACKDROP_ROOT . '/' . $library['library path'] . '/' . $options['file'];
   if (empty($options['file']) || !file_exists($file)) {
     return;
   }
@@ -870,4 +870,16 @@ function libraries_get_version($library, $options) {
     $options['lines']--;
   }
   fclose($file);
+}
+
+
+/**
+ * Implements hook_autoload_info().
+ */
+function libraries_autoload_info()
+{
+  return array(
+    'LibrariesTestCase' => 'tests/libraries.test',
+    'LibrariesUnitTestCase' => 'tests/libraries.test',
+  );
 }

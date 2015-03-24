@@ -12,7 +12,7 @@ function libraries_drush_command() {
   $items['libraries-list'] = array(
     'callback' => 'libraries_drush_list',
     'description' => dt('Lists registered library information.'),
-    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_FULL,
+    'bootstrap' => DRUSH_BOOTSTRAP_BACKDROP_FULL,
   );
   /**$items['libraries-download'] = array(
     'callback' => 'libraries_drush_download',
@@ -52,7 +52,7 @@ function libraries_drush_cache_clear(&$types) {
  * Clears the library cache.
  */
 function libraries_drush_invalidate_cache() {
-  // @see drupal_flush_all_caches()
+  // @see backdrop_flush_all_caches()
   foreach (libraries_flush_caches() as $table) {
     cache_clear_all('*', $table, TRUE);
   }
@@ -78,7 +78,7 @@ function libraries_drush_list() {
     // $header is TRUE.
     $rows[] = array(dt('Name'), dt('Status'), dt('Version'), dt('Variants'), dt('Dependencies'));
     foreach ($libraries as $name => $library) {
-      $status = ($library['installed'] ? dt('OK') : drupal_ucfirst($library['error']));
+      $status = ($library['installed'] ? dt('OK') : backdrop_ucfirst($library['error']));
       $version = (($library['installed'] && !empty($library['version'])) ? $library['version'] : '-');
 
       // Only list installed variants.

@@ -15,7 +15,7 @@ function libraries_test_theme_libraries_info() {
   );
   $libraries['example_theme_integration_files'] = array(
     'name' => 'Example theme integration file',
-    'library path' => drupal_get_path('module', 'libraries') . '/tests/libraries/example',
+    'library path' => backdrop_get_path('module', 'libraries') . '/tests/libraries/example',
     'version' => '1',
     'integration files' => array(
       'libraries_test_theme' => array(

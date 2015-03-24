@@ -71,9 +71,9 @@
  *     require any arguments. The latter might be the case with a
  *     library-specific version callback, for example.
  *   - files: An associative array of library files to load. Supported keys are:
- *     - js: A list of JavaScript files to load, using the same syntax as Drupal
+ *     - js: A list of JavaScript files to load, using the same syntax as Backdrop
  *       core's hook_library().
- *     - css: A list of CSS files to load, using the same syntax as Drupal
+ *     - css: A list of CSS files to load, using the same syntax as Backdrop
  *       core's hook_library().
  *     - php: A list of PHP files to load.
  *   - dependencies: An array of libraries this library depends on. Similar to
@@ -127,7 +127,7 @@
  *   - versions: (optional) An associative array of supported library versions.
  *     Naturally, libraries evolve over time and so do their APIs. In case a
  *     library changes between versions, different 'files' may need to be
- *     loaded, different 'variants' may become available, or Drupal modules need
+ *     loaded, different 'variants' may become available, or Backdrop modules need
  *     to load different integration files adapted to the new version. Each key
  *     is a version *string* (PHP does not support floats as keys). Each value
  *     is an associative array of top-level properties that are entirely
@@ -470,5 +470,5 @@ function hook_libraries_info_alter(&$libraries) {
 function hook_libraries_info_file_paths() {
   // Taken from the Libraries test module, which needs to specify the path to
   // the test library.
-  return array(drupal_get_path('module', 'libraries_test') . '/example');
+  return array(backdrop_get_path('module', 'libraries_test') . '/example');
 }

@@ -9,7 +9,7 @@
 
 (function ($) {
 
-Drupal.behaviors.librariesTest = {
+Backdrop.behaviors.librariesTest = {
   attach: function(context, settings) {
     $('.libraries-test-module-js').text('If this text shows up, libraries_test_theme.js was loaded successfully.')
   }

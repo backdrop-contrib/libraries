@@ -1,7 +1,7 @@
 
 -- SUMMARY --
 
-Libraries API provides external library handling for Drupal modules.
+Libraries API provides external library handling for Backdrop modules.
 
 For a full description visit the project page:
   http://drupal.org/project/libraries
