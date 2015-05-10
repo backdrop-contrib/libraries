@@ -1,5 +1,5 @@
 name = Libraries
 description = Allows version-dependent and shared usage of external libraries.
 backdrop = 1.x
-; We use hook_system_theme_info() which was added in Drupal 7.11
+type = module
 files[] = tests/libraries.test
