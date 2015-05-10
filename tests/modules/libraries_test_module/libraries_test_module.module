@@ -625,11 +625,3 @@ function libraries_test_module_system_theme_info() {
   return $themes;
 }
 
-
-/**
- * Implements hook_autoload_info().
- */
-function libraries_test_autoload_info(){
-    return array(
-        'twitter_views_handler_field_xss' => 'twitter_views_field_handlers.inc',
-
