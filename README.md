@@ -9,12 +9,12 @@ For a full description visit the Drupal project page:
   http://drupal.org/project/libraries
 
 <h2>Status</h2>
-This port is functional but requires further testing.
+This port is functional and all test pass.
 
 <h2>Installation</h2>
 
-Install as usual, then add any required javascript libraries to their own directories 
-within \sites\all\libraries
+Install as usual, then add any required javascript libraries to their own directories within
+the recommended location /libraries
 
 <h2>License</h2>
 
