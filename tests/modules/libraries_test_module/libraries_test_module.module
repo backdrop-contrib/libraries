@@ -514,7 +514,7 @@ function _libraries_test_module_callback(&$library, $version, $variant, $group) 
   // The following is used to test caching of library information.
   // Only set the message for the top-level library to prevent confusing,
   // duplicate messages.
-  if (!isset($version) && !isset($variant) && variable_get('libraries_test_module_cache', FALSE)) {
+  if (!isset($version) && !isset($variant) && config_get('libraries.settings','libraries_test_module_cache')) {
     backdrop_set_message("The <em>$group</em> callback group was invoked.");
   }
 }

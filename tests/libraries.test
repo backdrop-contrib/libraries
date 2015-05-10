@@ -486,7 +486,7 @@ class LibrariesTestCase extends BackdropWebTestCase {
     $this->assertLibraryFiles('example_4', 'Concurrent version and variant overloading');
 
     // Test caching.
-    variable_set('libraries_test_module_cache', TRUE);
+    config_set('libraries.settings','libraries_test_module_cache', TRUE);
     cache_clear_all('example_callback', 'cache_libraries');
     // When the library information is not cached, all callback groups should be
     // invoked.
@@ -504,7 +504,7 @@ class LibrariesTestCase extends BackdropWebTestCase {
     $this->assertNoRaw('The <em>post-detect</em> callback group was not invoked.', 'Post-detect callback not invoked for cached libraries.');
     $this->assertRaw('The <em>pre-load</em> callback group was invoked.', 'Pre-load callback invoked for cached libraries.');
     $this->assertRaw('The <em>post-load</em> callback group was invoked.', 'Post-load callback invoked for cached libraries.');
-    variable_set('libraries_test_module_cache', FALSE);
+      config_set('libraries.settings','libraries_test_module_cache', FALSE);
   }
 
   /**
@@ -556,7 +556,7 @@ class LibrariesTestCase extends BackdropWebTestCase {
         // JavaScript and CSS files appear as full URLs and with an appended
         // query string.
         if (in_array($extension, array('js', 'css'))) {
-          $filepath = url('', array('absolute' => TRUE)) . $filepath . '?' . variable_get('css_js_query_string');
+          $filepath = url('', array('absolute' => TRUE)) . $filepath . '?' . state_get('css_js_query_string','0');
         }
         $raw = $html[$extension][0] . $filepath . $html[$extension][1];
         if ($expected) {

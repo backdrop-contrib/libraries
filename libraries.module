@@ -883,3 +883,14 @@ function libraries_autoload_info()
     'LibrariesUnitTestCase' => 'tests/libraries.test',
   );
 }
+
+/**
+ * Implements hook_config_info().
+ */
+function libraries_config_info() {
+    $prefixes['libraries.settings'] = array(
+        'label' => t('Libraries API settings'),
+        'group' => t('Configuration'),
+    );
+    return $prefixes;
+}

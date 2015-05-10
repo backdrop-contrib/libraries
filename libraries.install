@@ -20,3 +20,16 @@ function libraries_schema() {
 function libraries_update_last_removed() {
   return 7200;
 }
+
+/**
+ * Move libraries settings from variables to config.
+ */
+function libraries_update_1000() {
+    // Migrate variables to config.
+    $config = config('libraries.settings');
+    $config->set('libraries_test_module_cache', update_variable_get('libraries_test_module_cache', false));
+    $config->save();
+
+    // Delete variables.
+    update_variable_del('libraries_test_module_cache');
+}
