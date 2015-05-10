@@ -9,7 +9,7 @@ For a full description visit the Drupal project page:
   http://drupal.org/project/libraries
 
 <h2>Status</h2>
-This port is functional and all test pass.
+This port is functional and all tests pass.
 
 <h2>Installation</h2>
 
