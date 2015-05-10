@@ -1,0 +1,15 @@
+[LibrariesUnitTestCase]
+name = Libraries API unit tests
+description = Tests basic functions provided by Libraries API
+group = Libraries API
+file = libraries.test
+
+
+[LibrariesTestCase]
+name = Libraries detection and loading
+description = Tests detection and loading of libraries
+group = Libraries API
+file = libraries.test
+
+
+
