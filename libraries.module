@@ -90,9 +90,6 @@ function libraries_get_libraries() {
   // Always search sites/all/libraries.
   $searchdir[] = 'sites/all/libraries';
 
-  // Also search sites/<domain>/*.
-  $searchdir[] = "$config/libraries";
-
   // Retrieve list of directories.
   $directories = array();
   $nomask = array('CVS');
