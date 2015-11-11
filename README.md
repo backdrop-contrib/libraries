@@ -1,5 +1,4 @@
-<h1>Libraries API</h1>
--------------------------
+#Libraries API
 
 This module is a port to Backdrop of the Drupal contributed module 'Libraries'. 
 
@@ -8,25 +7,25 @@ Libraries API provides external library handling for other Backdrop modules.
 For a full description visit the Drupal project page:
   http://drupal.org/project/libraries
 
-<h2>Status</h2>
+##Status
 This port is functional and all tests pass.
 
-<h2>Installation</h2>
+##Installation
 
 Install as usual, then add any required javascript libraries to their own directories within
 the recommended location /libraries
 
-<h2>License</h2>
+##License
 
 This project is GPL v2 software. See the LICENSE.txt file in this directory for complete text.
     
     
-<h2>Current Maintainers</h2>
+##Current Maintainers
 
-<h3>For Drupal:</h3>
-<p>Tobias Stöckler - tstoeckler</p>
-<p>Daniel Kudwien - sun</p>
+###For Drupal:
+ + Tobias Stöckler - tstoeckler
+ + Daniel Kudwien - sun
 
 
-<h3>Port to Backdrop:</h3>
-Graham Oliver github.com/Graham-72
+###Port to Backdrop:
+ + Graham Oliver github.com/Graham-72
