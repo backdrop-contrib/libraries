@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Drush integration for Libraries API.
@@ -168,3 +167,4 @@ function libraries_drush_download($name) {
     drush_log(dt('Drush was unable to download the Colorbox plugin to @path', array('@path' => $path)), 'error');
   }
 }
+

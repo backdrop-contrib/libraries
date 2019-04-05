@@ -1,5 +1,6 @@
-name = Libraries
+name = Libraries (deprecated)
 description = Allows version-dependent and shared usage of external libraries.
 backdrop = 1.x
 type = module
 files[] = tests/libraries.test
+

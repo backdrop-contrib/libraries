@@ -1,33 +1,51 @@
-#Libraries API
+Libraries API (Deprecated)
+==========================
 
-This module is a port to Backdrop of the Drupal contributed module 'Libraries'. 
+**NOTE:** The Libraries API contrib module has been deprecated as equivalent
+functionality has been added to Backdrop core. This module will not receive any
+further updates.
 
-Libraries API provides external library handling for other Backdrop modules.
+If a module you're trying to use depends on Libraries API, please suggest to the
+module maintainer that they update their module to use core's library functions
+instead.
 
-For a full description visit the Drupal project page:
-  http://drupal.org/project/libraries
+If you're a module maintainer and currently depend on Libraries API, please
+replace Libraries API-specific functions with their Backdrop core equivalents:
 
-##Status
-This port is functional and all tests pass.
+`hook_libraries_info()` -> [`hook_library_info()`](https://api.backdropcms.org/api/backdrop/core%21modules%21system%21system.api.php/function/hook_library_info/1)  
+`hook_libraries_info_alter()` -> [`hook_library_info_alter()`](https://api.backdropcms.org/api/backdrop/core%21modules%21system%21system.api.php/function/hook_library_info_alter/1)  
+`libraries_load()` -> [`backdrop_add_library()`](https://api.backdropcms.org/api/backdrop/core%21includes%21common.inc/function/backdrop_add_library/1)  
+`libraries_info()` -> [`backdrop_get_library()`](https://api.backdropcms.org/api/backdrop/core%21includes%21common.inc/function/backdrop_get_library/1)  
+Note that this isn't simply a matter of renaming the functions. You will need to
+rewrite some of your code. Check the API documentation for more information.
 
-##Installation
+---
 
-Install as usual, then add any required javascript libraries to their own directories within
-the recommended location /libraries
+This module is a Backdrop port of Drupal's contributed module
+'[Libraries](https://www.drupal.org/project/libraries)'. Libraries API provides
+external library handling for other Backdrop modules.
 
-##License
+Installation
+------------
 
-This project is GPL v2 software. See the LICENSE.txt file in this directory for complete text.
-    
-    
-##Current Maintainers
+- Install this module using the official Backdrop CMS instructions at
+  https://backdropcms.org/guide/modules.
 
- + Peter Anderson - BWPanda
+Current Maintainers
+-------------------
 
-###For Drupal:
- + Tobias Stöckler - tstoeckler
- + Daniel Kudwien - sun
+- Peter Anderson (https://github.com/BWPanda).
 
+Credits
+-------
 
-###Port to Backdrop:
- + Graham Oliver github.com/Graham-72
+- Ported to Backdrop CMS by Graham Oliver (https://github.com/Graham-72).
+- Originally written for Drupal by Daniel Kudwien
+  (https://www.drupal.org/u/sun).
+
+License
+-------
+
+This project is GPL v2 software. See the LICENSE.txt file in this directory for
+complete text.
+

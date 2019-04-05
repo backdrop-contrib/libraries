@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * External library handling for Backdrop modules.
@@ -894,3 +893,4 @@ function libraries_config_info() {
     );
     return $prefixes;
 }
+

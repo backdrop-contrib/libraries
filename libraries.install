@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Install, uninstall, and update functions for libraries.module.
@@ -33,3 +32,4 @@ function libraries_update_1000() {
     // Delete variables.
     update_variable_del('libraries_test_module_cache');
 }
+

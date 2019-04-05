@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Documents API functions for Libraries module.
@@ -472,3 +471,4 @@ function hook_libraries_info_file_paths() {
   // the test library.
   return array(backdrop_get_path('module', 'libraries_test') . '/example');
 }
+
