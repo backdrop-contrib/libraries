@@ -22,6 +22,8 @@ This project is GPL v2 software. See the LICENSE.txt file in this directory for 
     
 ##Current Maintainers
 
+ + Peter Anderson - BWPanda
+
 ###For Drupal:
  + Tobias Stöckler - tstoeckler
  + Daniel Kudwien - sun
