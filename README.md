@@ -26,13 +26,13 @@ then please file an issue to address that use case in Backrop core:
 https://github.com/backdrop/backdrop-issues/issues/new/choose
 
 If your module requires a 3rd party library that is already used and bundled by
-another module, then it is recommended that the 3rd party library should be
-split out of the "parent" module that it used to ship with, and moved into a new
-contrib library-only module. This new separate module will only be used to hold
-the library (implementing `hook_library_info()`/`hook_library_info_alter()`).
-Then all other contrib modules that require the 3rd party library, should
-declare the library module as a dependency in their .info files, using
-`dependencies[] = name_of_library_module`.
+another module, then your module should either depend on that other module, or
+the 3rd party library should be split out of the "parent" module that it used to
+ship with, and moved into a new contrib library-only module. This new separate
+module will only be used to hold the library (implementing `hook_library_info()`
+/`hook_library_info_alter()`). Then all other contrib modules that require the
+3rd party library, should declare the library module as a dependency in their
+.info files, using `dependencies[] = name_of_library_module`.
 
 ---
 
