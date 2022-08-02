@@ -22,7 +22,7 @@ rewrite some of your code. Check the API documentation for more information.
 In general, Libraries API shouldn't be needed on Backdrop sites, since 3rd party
 libraries **should** be bundled into the modules that require them. If you have
 a use case that can't currently be solved without having to use Libraries API,
-then please file an issue to address that use case in Backrop core:
+then please file an issue to address that use case in Backdrop core:
 https://github.com/backdrop/backdrop-issues/issues/new/choose
 
 If your module requires a 3rd party library that is already used and bundled by
@@ -49,7 +49,7 @@ Installation
 Current Maintainers
 -------------------
 
-- Peter Anderson (https://github.com/BWPanda).
+- Looking for a maintainer...
 
 Credits
 -------
