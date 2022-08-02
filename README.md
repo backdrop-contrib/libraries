@@ -49,7 +49,7 @@ Installation
 Current Maintainers
 -------------------
 
-- Peter Anderson (https://github.com/BWPanda).
+- Looking for a maintainer...
 
 Credits
 -------
