@@ -11,7 +11,7 @@ function libraries_drush_command() {
   $items['libraries-list'] = array(
     'callback' => 'libraries_drush_list',
     'description' => dt('Lists registered library information.'),
-    'bootstrap' => DRUSH_BOOTSTRAP_BACKDROP_FULL,
+    'bootstrap' => Drush\Boot\BackdropBoot::BOOTSTRAP_FULL,
   );
   /**$items['libraries-download'] = array(
     'callback' => 'libraries_drush_download',
