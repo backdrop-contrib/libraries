@@ -1,4 +1,4 @@
-name = Libraries (deprecated)
+name = Libraries
 description = Allows version-dependent and shared usage of external libraries.
 backdrop = 1.x
 type = module
