@@ -49,7 +49,7 @@ Installation
 Current Maintainers
 -------------------
 
-- Looking for a maintainer...
+- [Herb v/d Dool](https://github.com/herbdool)
 
 Credits
 -------
